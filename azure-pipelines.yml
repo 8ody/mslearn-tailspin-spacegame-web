@@ -2,15 +2,18 @@ trigger:
 - '*'
 
 pool:
-  vmImage: 'vs2017-win2016'
+  vmImage: 'ubuntu-16.04'
   demands:
     - npm
 
 steps:
 - task: UseDotNet@2
-  displayName: 'Use .NET Core SDK 3.1.100'
+  displayName: 'Use .Net Core sdk 2.1.x'
   inputs:
-    version: 3.1.100
+    packageType: sdk
+    version: 2.1.x
+    installationPath: $(Agent.ToolsDirectory)/dotnet
+    includePreviewVersions: true
 
 - task: Npm@1
   displayName: 'Run npm install'
@@ -51,3 +54,4 @@ steps:
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: drop'
+  condition: succeeded()
