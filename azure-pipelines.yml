@@ -13,12 +13,12 @@ variables:
 
 steps:
 - task: UseDotNet@2
-  displayName: 'Use .Net Core sdk 2.1.x'
+  displayName: 'Use .NET Core SDK $(dotnetSdkVersion)'
   inputs:
-    packageType: sdks
-    version: 2.1.x
-    installationPath: $(Agent.ToolsDirectory)/dotnet
-    includePreviewVersions: true
+    version: '$(dotnetSdkVersion)'
+    
+
+
 - task: Npm@1
   displayName: 'Run npm install'
   inputs:
